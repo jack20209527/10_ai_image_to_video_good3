@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>支付creem</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="/js/my-common-util.js?v=202509111346"></script>
+  <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+  <script src="/js/my_pay_creem.js?v=202509111344"></script>
+
+  <script>
+    // 页面加载完成后设置事件监听器
+    document.addEventListener('DOMContentLoaded', function() {
+      // 设置点击事件
+      // document.getElementById('btn_pay').addEventListener('click', handlePayment);
+      document.getElementById('btn_pay').addEventListener('click', get_creem_checkout_url);
+      document.getElementById('btn_pay_status').addEventListener('click', get_creem_order_status);
+      document.getElementById('btn_pay_polling').addEventListener('click', startPolling);
+      document.getElementById('btn_web_hook').addEventListener('click', sendWebhook);
+    });
+
+    // 处理支付功能
+    async function handlePayment() {
+      document.getElementById('lable_pay').innerText = '正在初始化支付...';
+
+      try {
+        // 使用正确的API端点
+        const response = await axios.post(
+          // `https://api.creem.io/v1/checkouts`,
+          `https://test-api.creem.io/v1/checkouts`,
+          {
+            product_id: 'prod_py0jvVhSqZOFVPlisRQEs',
+            // 如果需要，可以添加其他参数
+            success_url: 'https://phototovideoai.app/', // 支付成功后重定向URL
+            // cancel_url: 'https://your-website.com/cancel',  // 取消支付后重定向URL
+          },
+          {
+            headers: { 
+              "x-api-key": `creem_test_6jtQgusrLE1yVE5j7SNUct`,
+              "Content-Type": "application/json"
+            },
+          }
+        );
+
+        // 处理 Creem.io 返回的响应
+        console.log("支付会话创建成功:", response.data);
+
+        // 获取 redirectUrl
+        const redirectUrl = response.data.redirectUrl;
+
+        // 更新UI显示
+        document.getElementById('lable_pay').innerText = `支付会话已创建，即将跳转到支付页面...`;
+
+        // 重定向到 Creem.io 支付页面
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        } else {
+          document.getElementById('lable_pay').innerText = `错误：响应中缺少redirectUrl`;
+          console.error("redirectUrl is missing in the response.");
+        }
+
+      } catch (error) {
+        // 更详细地处理和显示错误
+        console.error("Error creating checkout session:", error);
+        
+        let errorMessage = "支付初始化失败";
+        if (error.response) {
+          // 服务器返回了错误状态码
+          errorMessage += `：服务器返回 ${error.response.status}`;
+          console.log("Error response:", error.response.data);
+        } else if (error.request) {
+          // 请求已发送但没有收到响应
+          errorMessage += "：未收到服务器响应";
+        } else {
+          // 请求配置时发生错误
+          errorMessage += `：${error.message}`;
+        }
+        
+        document.getElementById('lable_pay').innerText = errorMessage;
+      }
+    }
+
+    // 发送webhook（示例函数）
+    async function sendWebhook() {
+      try {
+        document.getElementById('lable_pay').innerText = "正在发送webhook...";
+        
+        // 这里应替换为您的后端API，用于触发webhook
+        // 注意：通常webhook是由支付服务商发送到您的服务器，而不是从前端发送
+        const response = await axios.post('/your-backend-api/trigger-webhook', {
+          // webhook相关数据
+        });
+        
+        document.getElementById('lable_pay').innerText = "Webhook发送成功：" + JSON.stringify(response.data);
+      } catch (error) {
+        console.error("Error sending webhook:", error);
+        document.getElementById('lable_pay').innerText = "Webhook发送失败：" + error.message;
+      }
+    }
+  </script>
+
+</head>
+
+<body class="p-4">
+  <h1 class="text-2xl font-bold mb-6">Creem支付集成演示</h1>
+
+  <!-- 支付 -->
+  <div class="mb-4 p-4 bg-blue-100 rounded">
+    <button id="btn_pay"
+      class="bg-[#ceed63] text-black font-bold px-4 py-2 rounded hover:bg-[#9dee95] transition">
+      开始支付
+    </button>
+    
+    <button id="btn_pay_status"
+      class="bg-[#ceed63] text-black font-bold px-4 py-2 rounded hover:bg-[#9dee95] transition">
+      获取订单状态
+    </button>
+
+    <button id="btn_pay_polling"
+      class="bg-[#ceed63] text-black font-bold px-4 py-2 rounded hover:bg-[#9dee95] transition">
+      启动轮训
+    </button>
+    
+  </div>
+
+  <!-- 发送一个webhook -->
+  <div class="mb-4 p-4 bg-blue-100 rounded">
+    <button id="btn_web_hook"
+      class="bg-[#ceed63] text-black font-bold px-4 py-2 rounded hover:bg-[#9dee95] transition">
+      发送creem的Webhook
+    </button>
+  </div>
+
+  <div class="mt-6 space-y-2">
+    <h6 class="font-semibold">
+      <label id="lable_login_user_info">登录后的日志:</label>
+    </h6>
+    <h6 class="font-semibold">
+      <label id="lable_user_info">用户信息的日志:</label>
+    </h6>
+    <h6 class="font-semibold">
+      <label id="lable_pay">支付相关的日志:</label>
+    </h6>
+  </div>
+
+</body>
+
+</html>

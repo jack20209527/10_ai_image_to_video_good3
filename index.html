@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>111
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo To Video AI | Online Image to Video Converter</title>
+    <meta name="description" content="Easily transform your photos into stunning videos with our AI photo to video generator. Experience AI video generation with cutting-edge models like Veo3 and Vidu.">
+    <meta name="keywords" content="">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="stylesheet" href="/css/my-arrow-content.css">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script src="/js/my-common-main-page-utils.js"></script>
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    <script src="/js/my-arrow-content.js"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWQJSYVF4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BWQJSYVF4W');
+    </script>
+    <!-- clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t8qoslp193");
+    </script>
+
+ 
+    <!-- 谷歌投放广告的代码: Event snippet for 网页浏览 conversion page -->
+    <script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-11308684436/I0PUCIW3rrYbEJSps5Aq',
+        'value': 1.0,
+        'currency': 'CNY'
+    });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11308684436">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11308684436');
+</script>
+
+    
+<!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+        // 设置导航条的按钮的点击事件
+        init_nav_event ("./", -1);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 自动播放顶部视频
+            const id_video_player_top = document.getElementById('id_video_player_top');
+            id_video_player_top.play().catch(error => {
+                    console.error("自动播放失败:", error);
+                });
+
+            // 英雄区左侧第一个视频
+            const id_video_player_left_1 = document.getElementById('id_video_player_left_1');
+            id_video_player_left_1.play().catch(error => {
+                    console.error("自动播放失败:", error);
+                });
+            const id_video_player_right_1 = document.getElementById('id_video_player_right_1');
+            id_video_player_right_1.play().catch(error => {
+                    console.error("自动播放失败:", error);
+                });
+
+            // 设置顶部按钮点击
+            ClickUtil.onClick('id_create_ai_video_button', () => {
+                window.location.href = "/image-to-video";
+            });
+
+            ClickUtil.onClick('id_create_ai_image_button', () => {
+                window.location.href = "/image-to-image";
+            });
+
+            
+        });
+
+</script>
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- 通用顶部导航组件 -->
+    <header class="fixed top-0 inset-x-0 h-14 bg-[#0b0d12]/90 backdrop-blur border-b border-white/5 z-50">
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="pt-14 mx-auto">
+
+        <!-- 主内容区域 -->
+        <main class="">
+
+            <!-- 顶部视频区域 -->
+            <div class="relative">
+                <video id="id_video_player_top" style="width: 100%; height: 500px; object-fit: cover;" muted playsinline loop>
+                    <source src="/img/videos/home.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                </video>
+                <!-- 蒙层 -->
+                <div class="absolute inset-0 h-[500px] bg-black/20 flex flex-col items-center justify-center text-white">
+                    <h1 class="text-4xl font-bold   text-center max-w-4xl">
+                        The Ultimate Photo to Video AI Generator: Turn Your Photos into Stunning Videos</h1>
+                    <p class="mt-2 text-lg max-w-4xl">
+                        Welcome to photo to video ai, your one-stop platform for transforming photos into stunning videos. Our powerful, AI video generator uses cutting-edge models like Veo3、Vidu、Kling etc to bring your creativity to life with just a few clicks. Start creating now!
+                    </p>
+                    
+                    <div class="mt-16 flex gap-4">
+                    <button id="id_create_ai_video_button" class="bg-gradient-to-r from-purple-500 to-red-500 text-white py-2 px-4 rounded transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-red-500/50">
+                        Create AI Video
+                    </button>
+                    <button id="id_create_ai_image_button" class="bg-gradient-to-r from-blue-500 to-green-500 text-white py-2 px-4 rounded transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/50">
+                        Create AI Image
+                    </button>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- 中间的英雄区 -->
+            <div class="">
+
+                <!-- 添加功能特点部分 -->
+                <section class="mt-6 relative overflow-hidden">
+
+                    <div class="relative mx-auto">
+                        <div class="text-center px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+                                    Explore AI Video & Image Creations in Action
+                            </h2>
+                            <p class="text-gray-400 text-lg max-w-1xl mx-auto" >
+                                Dive into a world of possibilities and see what our platform can do! Below are stunning examples of AI-generated videos created with models like Veo3, Nano Banana, and more. From turning a single photo into a cinematic clip to animating creative concepts, these videos show the true power of our AI. Explore the gallery and get inspired for your next project.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative overflow-hidden mt-4 ">
+                        <!-- 左侧蒙层 -->
+                        <div class="absolute top-0 bottom-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-10"></div>
+            
+                        <div class="home_top_video_list_scroll_inner">
+                            <div id="videoList" class="flex" ></div>
+                        </div>
+
+                        <!-- 右侧蒙层 -->
+                        <div class="absolute top-0 bottom-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-10"></div>
+                    </div>
+                </section>
+
+                <!-- 1.上左 - 添加一个左侧的视频演示 -->
+                <section class="mx-4 md:mx-8 lg:mx-12 mt-8 relative overflow-hidden">
+                    <div class="flex flex-col md:flex-col lg:flex-row">
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 mb-4 md:mb-0 md:mr-2 lg:mr-4">
+                            <video id="id_video_player_left_1" style="width: 100%; height: 460px; object-fit: cover;" muted playsinline loop class="rounded-lg">
+                                <source src="/img/videos/home_left_video.webm" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+        
+                        <div class="relative w-full md:w-full md:mt-4 lg:w-1/2 flex flex-col justify-center px-4 ">
+                            <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-red-500 bg-clip-text text-transparent">
+                                Photo to Video AI
+                            </h2>
+                            <h3 class="mt-2 text-lg">Transform your photos into dynamic videos with our powerful <span class=\"text-purple-300\">photo to video ai</span> generator. It makes the process easy, with no technical skills required.</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-purple-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75v-2.25M15.75 12L12 15.75m0 0L8.25 12m3.75 3.75V3" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-purple-300">Upload Your Photo:</strong> Easily upload any image to transform it into a captivating video clip with our powerful <span class=\"text-purple-300\">photo to video ai</span> tool.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-red-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h8.25A2.25 2.25 0 0119.5 6v.878m-13.5 0c.933 0 1.85.152 2.7.458C10.638 7.425 11.272 7.5 12 7.5c.728 0 1.362-.075 2.1-.264A4.502 4.502 0 0118 6.878m-13.5 0c-.354.904-.527 1.884-.527 2.922a9.742 9.742 0 00.527 2.922m13.5 0c.354.904.527 1.884.527 2.922a9.742 9.742 0 01-.527 2.922M6.75 15.75h2.25A2.25 2.25 0 0111.25 18v2.25H6.75A2.25 2.25 0 014.5 18v-2.25zm10.5-4.5h2.25a2.25 2.25 0 012.25 2.25V18h-4.5v-2.25a2.25 2.25 0 012.25-2.25zm-4.5-9h2.25a2.25 2.25 0 012.25 2.25V5.25h-4.5V3z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-red-300">Choose an AI Model:</strong> Select from our powerful <span class="text-red-300">AI video models</span> like <span class="text-red-300">Veo3</span> to define your video's style.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-yellow-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.827L14.4 7.5H21a1.5 1.5 0 011.5 1.5v4.5a1.5 1.5 0 01-1.5 1.5h-5.6l-3.05 3.673a1.5 1.5 0 01-2.2-.213l-3.327-4.008a1.5 1.5 0 01-.215-2.2L7.35 7.5H3a1.5 1.5 0 01-1.5-1.5V6a1.5 1.5 0 011.5-1.5h4.35" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-yellow-300">Generate:</strong> Click 'Generate' and let our <span class="text-yellow-300">PhotoToVideoAI platform</span> create and animate your video.
+                                    </span>
+                                </li>
+                            </ul>
+                            
+                            <a href="/image-to-video">
+                                <button class="bg-gradient-to-r from-purple-500 to-red-500 text-white text-bold py-2 w-[200px] rounded-lg mt-4">
+                                    Image To Video
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 2 -->
+                <section class="mx-4 md:mx-8 lg:mx-12 mt-8 relative overflow-hidden">
+                    <div class="flex flex-col-reverse md:flex-col-reverse md:flex-col lg:flex-row">
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 md:mt-4 flex flex-col justify-center p-4">
+                            <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-red-500 bg-clip-text text-transparent">
+                                Text to Video AI
+                            </h2>
+                            <h3 class="mt-2 text-lg">Turn your words into stunning videos. Our powerful AI generator transforms your creative ideas into captivating clips. Simply type a prompt and watch our advanced models bring your vision to life—no editing skills needed. We also offer a powerful <span class="text-purple-300">photo to video ai</span> tool for creating videos from images.</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-purple-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-4.5 1.13a.5.5 0 01-.62-1.312l1.312-4.996a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold">Type Your Prompt:</strong> Our <span class="text-purple-300">AI video generator</span> uses advanced language processing to understand your text and create a unique video from it.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-red-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L1.875 10.5 9.813 5.096c.866-.5 2.017.228 2.017 1.32v8.16c0 1.092-1.151 1.82-2.017 1.32z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.004 15.904L22 10.5l-7.996-5.404c-.866-.5-2.017.228-2.017 1.32v8.16c0 1.092 1.151 1.82 2.017 1.32z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold">Select Your Style:</strong> Choose from popular <span class="text-red-300">AI video models</span>, including <span class="text-red-300">Veo3</span> and <span class="text-red-300">Vidu model</span>, to get the perfect look and feel.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-yellow-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 17.25a2.25 2.25 0 01-2.25-2.25V6.75A2.25 2.25 0 015.25 4.5h13.5a2.25 2.25 0 012.25 2.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75v-2.25" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-yellow-300">Generate:</strong> Our <span class="text-yellow-300">PhotoToVideoAI platform</span> will rapidly generate your video from text.
+                                    </span>
+                                </li>
+                            </ul>
+                            <a href="/text-to-video">
+                                <button class="bg-gradient-to-r from-purple-500 to-red-500 text-white text-bold py-2 w-[200px] rounded-lg mt-4">
+                                    Text To Video
+                                </button>
+                            </a>
+                        </div>
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 mt-4 md:mt-0 md:ml-2 lg:ml-4">
+                            <video id="id_video_player_right_1" style="width: 100%; height: 460px; object-fit: cover;" muted playsinline loop class="rounded-lg">
+                                <source src="/img/videos/home_right_video.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3 -->
+                <section class="mx-4 md:mx-8 lg:mx-12 mt-8 relative overflow-hidden">
+                    <div class="flex flex-col md:flex-col lg:flex-row">
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 mb-4 md:mb-0 md:mr-2 lg:mr-4">
+                            <div id="image-carousel" class="relative w-full h-[460px] overflow-hidden rounded-lg">
+                                <img id="carousel-image" src="/img/image_content0.jpg" class="w-full h-full object-cover" alt="banner">
+                            </div>
+
+                            <script>
+                                // 图片数组
+                                const images = [
+                                    "/img/image_content0.jpg",
+                                    "/img/image_content13.jpg",
+                                    "/img/image_content2.jpg",
+                                    "/img/image_content3.jpg",
+                                    "/img/image_content4.jpg",
+                                    "/img/image_content5.jpg"
+                                ];
+
+                                let currentIndex = 0;
+
+                                // 切换图片的函数
+                                function changeImage() {
+                                    currentIndex = (currentIndex + 1) % images.length; // 循环索引
+                                    const carouselImage = document.getElementById('carousel-image');
+                                    carouselImage.src = images[currentIndex]; // 更新图片源
+                                }
+
+                                // 每3秒切换图片
+                                setInterval(changeImage, 3000);
+                            </script>
+                        </div>
+
+                        <div class="relative w-full md:w-full lg:w-1/2 md:mt-4 flex flex-col justify-center px-4">
+                            <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-red-500 bg-clip-text text-transparent">
+                                Image To Image AI
+                            </h2>
+                            <h3 class="mt-2 text-lg">Transform your photos into unique new art. Our powerful AI image-to-image generator, alongside our popular <span class=\"text-purple-300\">photo to video ai</span> tool, lets you upload an existing photo, describe your vision, and let our cutting-edge AI reimagine it. Perfect for artists and anyone creating new visuals.</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-purple-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75v-2.25M15.75 12L12 15.75m0 0L8.25 12m3.75 3.75V3" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-purple-300">Upload Your Image:</strong> Start by uploading the photo you want to transform, whether for an image or with our <span class=\"text-purple-300\">photo to video ai</span> feature. Our AI will analyze it for the new creation.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-red-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-4.5 1.13a.5.5 0 01-.62-1.312l1.312-4.996a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-red-300">Describe Your Vision:</strong> Use a text prompt to tell our <span class="text-red-300">AI image generator</span> what you want to create. Try models like <span class="text-red-300">Flux.1</span> or <span class="text-red-300">Nano Banana</span> to achieve your desired style.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-yellow-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.827L14.4 7.5H21a1.5 1.5 0 011.5 1.5v4.5a1.5 1.5 0 01-1.5 1.5h-5.6l-3.05 3.673a1.5 1.5 0 01-2.2-.213l-3.327-4.008a1.5 1.5 0 01-.215-2.2L7.35 7.5H3a1.5 1.5 0 01-1.5-1.5V6a1.5 1.5 0 011.5-1.5h4.35" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-yellow-300">Generate & Download:</strong> Click 'Generate' to transform your image. Our <span class="text-yellow-300">PhotoToVideoAI platform</span> will deliver a high-quality creation, including with our <span class=\"text-purple-300\">photo to video ai</span> tool.
+                                    </span>
+                                </li>
+                            </ul>
+                            
+                            <a href="/image-to-image">
+                                <button class="bg-gradient-to-r from-purple-500 to-red-500 text-white text-bold py-2 w-[200px] rounded-lg mt-4">
+                                    Image To Image
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 4 -->
+                <section class="mx-4 md:mx-8 lg:mx-12 mt-8 relative overflow-hidden">
+                    <div class="flex flex-col-reverse md:flex-col-reverse md:flex-col lg:flex-row">
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 md:mt-4 flex flex-col justify-center ">
+                            <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-red-500 bg-clip-text text-transparent">
+                                Text to Image AI
+                            </h2>
+                            <h3 class="mt-2 text-lg">Unleash your imagination and create stunning visuals from words alone. Our powerful AI image generator, along with our <span class=\"text-purple-300\">photo to video ai</span> tool, transforms text prompts into high-quality images with unparalleled ease—no design skills needed.</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-purple-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-4.5 1.13a.5.5 0 01-.62-1.312l1.312-4.996a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-purple-300">Describe Your Vision:</strong> Simply type your idea. Our advanced models will interpret your words to bring your concepts to life.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-red-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L1.875 10.5 9.813 5.096c.866-.5 2.017.228 2.017 1.32v8.16c0 1.092-1.151 1.82-2.017 1.32z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.004 15.904L22 10.5l-7.996-5.404c-.866-.5-2.017.228-2.017 1.32v8.16c0 1.092 1.151 1.82 2.017 1.32z" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-red-300">Choose a Model & Style:</strong> Select from cutting-edge models like <span class="text-red-300">Flux.1 kontext</span> and <span class="text-red-300">Nano Banana</span> to generate your desired aesthetic. This also applies when using our <span class=\"text-purple-300\">photo to video ai</span> tool.
+                                    </span>
+                                </li>
+                                <li class="flex items-start text-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 flex-shrink-0 text-yellow-400 mr-2 mt-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.827L14.4 7.5H21a1.5 1.5 0 011.5 1.5v4.5a1.5 1.5 0 01-1.5 1.5h-5.6l-3.05 3.673a1.5 1.5 0 01-2.2-.213l-3.327-4.008a1.5 1.5 0 01-.215-2.2L7.35 7.5H3a1.5 1.5 0 01-1.5-1.5V6a1.5 1.5 0 011.5-1.5h4.35" />
+                                    </svg>
+                                    <span>
+                                        <strong class="font-bold text-yellow-300">Generate:</strong> Our <span class="text-yellow-300">PhotoToVideoAI platform</span> creates stunning images with a single click, ready for you to download and use. This includes content generated by our <span class=\"text-purple-300\">photo to video ai</span> tool.
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <a href="/text-to-image">
+                                <button class="bg-gradient-to-r from-purple-500 to-red-500 text-white text-bold text-bold py-2 w-[200px] rounded-lg mt-4">
+                                    Text to Image AI
+                                </button>
+                            </a>
+                        </div>
+                        
+                        <div class="relative w-full md:w-full lg:w-1/2 mt-4 md:mt-0 md:ml-2 lg:ml-4">
+                            <div id="image-carousel1" class="relative w-full h-[400px] overflow-hidden rounded-lg">
+                                <img id="carousel-image1" src="/img/image_content0.jpg" class="w-full h-full object-cover" alt="banner">
+                            </div>
+
+                            <script>
+                                // 图片数组
+                                const images1 = [
+                                    "/img/image_content6.jpg",
+                                    "/img/image_content12.jpg",
+                                    "/img/image_content8.jpg",
+                                    "/img/image_content9.jpg",
+                                    "/img/image_content10.jpg",
+                                    "/img/image_content11.jpg"
+                                ];
+
+                                let currentIndex1 = 0;
+
+                                // 切换图片的函数
+                                function changeImage1() {
+                                    currentIndex1 = (currentIndex1 + 1) % images1.length; // 循环索引
+                                    const carouselImage1 = document.getElementById('carousel-image1');
+                                    carouselImage1.src = images1[currentIndex1]; // 更新图片源
+                                }
+
+                                // 每3秒切换图片
+                                setInterval(changeImage1 , 3000);
+                            </script>
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- 使用流程部分 -->
+<section class="py-4 mt-8 relative overflow-hidden">
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-[#0A0A0B] opacity-90"></div>
+                        <div class="absolute inset-0 bg-gradient-to-b from-[#FF3366]/10 via-transparent to-[#9D34DA]/10"></div>
+                    </div>
+
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                                <span class="bg-gradient-to-r from-[#FF3366] to-[#9D34DA] bg-clip-text text-transparent"
+                                data-lan="hero.flow_title"
+                                >
+                                    Why Choose Our PhotoToVideoAI Video & Image Generator?
+                                </span>
+                            </h2>
+                            <p class="text-gray-400 text-lg" data-lan="hero.flow_desc" >
+                                    We make AI creation effortless with powerful tools, an intuitive interface, and the best AI models.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="relative group">
+                                <div
+                                    class="relative z-10 bg-white/5 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
+                                    <div class="relative mb-8">
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-r from-[#FF3366] to-[#FF3366]/50 rounded-2xl flex items-center justify-center transform transition-transform group-hover:scale-110 group-hover:rotate-6">
+                                            <span class="text-3xl font-bold text-white">1</span>
+                                        </div>
+                                        <div
+                                            class="absolute -inset-4 bg-gradient-to-r from-[#FF3366]/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                        </div>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-4"
+                                            data-lan="hero.flow_1_title" >Access to Popular AI Models</h3>
+                                    <p class="text-gray-400" data-lan="hero.flow_1_desc" >
+                                            We integrate cutting-edge models like <span class="text-red-300">Veo3</span>, <span class="text-red-300">Nano Banana</span>, <span class="text-red-300">Kling</span>, and <span class="text-red-300">Flux.1 kontext</span>, giving you a comprehensive toolkit in one place, including our <span class="text-purple-300">photo to video ai</span> tool.
+                                    </p>
+                                </div>
+                                <div
+                                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#FF3366]/20 to-[#9D34DA]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                            </div>
+
+                            <div class="relative group">
+                                <div
+                                    class="relative z-10 bg-white/5 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
+                                    <div class="relative mb-8">
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-r from-[#9D34DA] to-[#9D34DA]/50 rounded-2xl flex items-center justify-center transform transition-transform group-hover:scale-110 group-hover:rotate-6">
+                                            <span class="text-3xl font-bold text-white">2</span>
+                                        </div>
+                                        <div
+                                            class="absolute -inset-4 bg-gradient-to-r from-[#9D34DA]/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                        </div>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-4" data-lan="hero.flow_2_title" >
+                                            Create Captivating <span class="text-purple-300">photo to video ai</span></h3>
+                                    <p class="text-gray-400" data-lan="hero.flow_2_desc" >
+                                            Effortlessly animate your images with our <span class="text-purple-300">photo to video ai</span> tool. Transform any picture into a dynamic video without complex editing skills.
+                                    </p>
+                                </div>
+                                <div
+                                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#9D34DA]/20 to-[#FF3366]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                            </div>
+
+                            <div class="relative group">
+                                <div
+                                    class="relative z-10 bg-white/5 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
+                                    <div class="relative mb-8">
+                                        <div
+                                            class="w-16 h-16 bg-gradient-to-r from-[#FF6B3D] to-[#FF6B3D]/50 rounded-2xl flex items-center justify-center transform transition-transform group-hover:scale-110 group-hover:rotate-6">
+                                            <span class="text-3xl font-bold text-white">3</span>
+                                        </div>
+                                        <div
+                                            class="absolute -inset-4 bg-gradient-to-r from-[#FF6B3D]/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                        </div>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-white mb-4" data-lan="hero.flow_3_title" >
+                                            Generate High-Quality Videos Instantly</h3>
+                                    <p class="text-gray-400" data-lan="hero.flow_3_desc" >
+                                            Our platform is built for speed and quality. Get stunning <span class="text-yellow-300">AI video from photo</span> and <span class="text-yellow-300">ai video generator</span> results in minutes. This includes our powerful <span class="text-purple-300">photo to video ai</span> tool.
+                                    </p>
+                                </div>
+                                <div
+                                    class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#FF6B3D]/20 to-[#9D34DA]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent">
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+                <!-- FAQ部分 -->
+                <section class="mt-8 mx-4 md:mx-12 lg:mx-24 ">
+                    <div class=" bg-[#1f202f] rounded-2xl shadow-lg p-6 ">
+                        <h2 class="text-2xl text-center font-bold mb-6">FAQ</h2>
+                        <div class="space-y-4">
+                            <div id="accordion-container" class="rounded-xl mt-2" >
+                        </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+            <section class="mt-8 py-20 bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-700 text-white relative overflow-hidden">
+                        <div class="absolute inset-0">
+                  <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+                  <div class="absolute bottom-10 right-10 w-40 h-40 bg-yellow-400/20 rounded-full blur-xl"></div>
+                  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-purple-400/10 rounded-full blur-2xl"></div>
+                            </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                  <div class="text-center">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-8 backdrop-blur-sm border border-white/30">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-10 w-10 text-white">
+                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                        <path d="M20 3v4"></path>
+                        <path d="M22 5h-4"></path>
+                        <path d="M4 17v2"></path>
+                        <path d="M5 18H3"></path>
+                      </svg>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Transform Photos into Videos: Bring Your Creativity to Life with AI</h2>
+                    <p class="text-xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed">Join thousands of creators revolutionizing their content with our powerful <span class="text-purple-300">photo to video ai</span> tool. Simply upload a photo to effortlessly generate a stunning <span class="text-red-300">ai video from photo</span>, no complex editing skills required.</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                      <a  id="start-creating-button" class="inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors shadow-lg group text-lg" href="/dashboard">
+                        Experience AI Video Generation Now
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                                                    </svg>
+                      </a>
+                                    </div>
+                        </div>
+                    </div>
+                </section>
+
+            <!-- 通用页脚组件 -->
+            <footer class="bg-[#0A0A0B] text-white py-8">
+                <!-- footer.js 会将内容注入到这里 -->
+            </footer>
+
+        </main>
+
+    </div>
+
+
+
+    <script src="/js/home_top_video_list.js"></script>
+    
+</body>
+</html>
+

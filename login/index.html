@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Photo to Video AI | Your Hub for AI Art & Video Creation</title>
+    <meta name="description" content="Access your Photo to Video AI account to start creating stunning AI videos, images, text-to-video, and image-to-image projects. Log in securely and unleash your creativity.">
+    <meta name="keywords" content="">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWQJSYVF4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BWQJSYVF4W');
+    </script>
+    <!-- clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t8qoslp193");
+    </script>
+    
+    
+    <style>
+        @keyframes float-slow{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+        @keyframes orb{0%{transform:translate(-50%,-50%) rotate(0)}100%{transform:translate(-50%,-50%) rotate(360deg)}}
+        .anim-float{animation:float-slow 4s ease-in-out infinite}
+        .anim-orb{animation:orb 18s linear infinite}
+    </style>
+
+    <!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+        // 设置导航条的按钮的点击事件
+        init_nav_event ("../", 1);
+
+        // 隐藏 价格布局、登录按钮、头像布局
+        document.addEventListener('DOMContentLoaded', () => {
+            const id_nav_credit_cart_layouot = document.getElementById('id_nav_credit_cart_layouot');
+            const id_btn_nav_login = document.getElementById('id_btn_nav_login');
+            const id_nav_user_info_layout = document.getElementById('id_nav_user_info_layout');
+
+            id_nav_credit_cart_layouot.classList.add('hidden');
+            id_btn_nav_login.classList.add('hidden');
+            id_nav_user_info_layout.classList.add('hidden');
+        });
+    </script>
+
+    <!-- 谷歌登录-->
+    <script>
+        //处理谷歌登录响应
+        function handleCredentialResponse(response) {
+            // 显示加载状态
+            LoadingUtil.show(); // 使用默认提示文本
+
+            // 处理登录响应，例如显示用户信息
+            // console.log("Encoded JWT ID token: " + response.credential);
+
+            // 使用 fetch 方法进行 GET 请求
+            // http://localhost:39603/go/lo/{"opt":"0", "google_token":"", "project_id":"0", "device_info":"1234"}
+            const jsonData = {
+                "opt": "0",
+                "google_token": response.credential,
+                "project_id": GlobalConfig.project_id,
+                "device_info": "6789",
+                "pay_platform": "1", // "0":免费的  "1":kedoppay  "2":lemon
+                "is_test": "0" // 0:正式 1:测试，第一次创建的时候，需要同步支付生成user_key，后面的webhook会和当前的用户系统连接
+            };
+
+            const jsonString = JSON.stringify(jsonData);
+            console.log(jsonString);
+
+            // url = "http://localhost:39603/go/lo/" + jsonString
+            url = GlobalConfig.url + "/go/lo/" + jsonString 
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Custom-Header': 'CustomValue' // 其他自定义头部
+                }
+            })
+                .then(response => {
+                    // 检查响应的状态码
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    // 将响应解析为 JSON
+                    return response.json();
+                })
+                .then(data => {
+                    // 处理解析后的数据
+                    console.log('GET 请求成功:', data);
+                    try {
+                        // const parsedData = JSON.parse(data);
+                        const parsedData = data;
+                        const userData = parsedData.data;
+                        console.log(userData.id);
+                        console.log(userData.uid);
+                        console.log(userData.head_url);
+                        console.log(userData.email);
+                        console.log(userData.name);
+                        console.log(userData.jifen);
+                        console.log(userData.google_id);
+                        console.log(userData.project_id);
+                        console.log(userData.user_key);
+
+                        console.log(parsedData.code);
+                        console.log(parsedData.msg);
+
+
+                        LocalStorageUtil.saveUserObject(userData); // 是json对象
+                        console.log("正在保存");
+
+                        // 获取 JSON 对象
+                        const localUser = LocalStorageUtil.getUserObject();
+                        if (localUser) {
+                            console.log('本地数据:', localUser.uid);
+                            console.log('本地数据:', localUser.project_id);
+                            console.log('本地数据:', localUser.jifen);
+                            console.log('本地数据:', localUser.token);
+                            console.log('本地数据:', localUser.token_expire);
+                            console.log('本地数据user_key:', localUser.user_key);
+                        }
+
+                        // var log_text = `名字: ${userData.name} <br> user_key: ${userData.user_key}`;
+                        // document.getElementById('user-name').innerText = log_text;
+
+                        // // 显示头像
+                        // const avatarDiv = document.getElementById('user_header');
+                        // avatarUrl = userData.head_url
+
+                        // if (avatarUrl) {
+                        //     avatarDiv.style.backgroundImage = `url('${avatarUrl}')`;
+                        //     avatarDiv.classList.remove('bg-gray-400');
+                        // }
+
+                        // 隐藏加载状态
+                        // document.getElementById('loadingState').classList.add('hidden');
+                        LoadingUtil.hide(); // 使用默认提示文本
+                        // window.location.href = '/';
+                        window.location.href = '/image-to-video/index.html';
+
+                    } catch (error) {
+                        console.error('Error parsing JSON:', error);
+                    }
+                })
+                .catch(error => {
+                    // 处理请求错误
+                    console.error('GET 请求失败:', error);
+                });
+        }
+    </script>
+
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- 通用顶部导航组件 -->
+    <header class="fixed top-0 inset-x-0 h-14 bg-[#0b0d12]/90 backdrop-blur border-b border-white/5 z-50">
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="pt-24 mx-auto">
+    <!-- 主要内容卡片 -->
+
+        <!-- Logo和标题（增强版：暗色+霓虹动效+玻璃卡片） -->
+        <div class="relative mb-12">
+            <!-- 背景霓虹渐变与发光粒子 -->
+            <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-2xl">
+                <div class="absolute left-1/3 top-0 w-[520px] h-[520px] bg-gradient-to-tr from-fuchsia-600/20 via-purple-600/15 to-indigo-500/10 blur-3xl"></div>
+                <div class="absolute right-0 top-8 w-[420px] h-[420px] bg-gradient-to-br from-sky-500/15 to-cyan-400/10 blur-3xl"></div>
+                <div class="absolute left-1/2 top-1/2 anim-orb w-80 h-80 rounded-full border border-white/5" style="transform-origin:center"></div>
+            </div>
+
+            <!-- Logo 霓虹玻璃卡片 -->
+            <div class="flex justify-center mb-6">
+                <div class="relative w-28 h-28 anim-float">
+                    <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-fuchsia-600/40 to-indigo-500/40 blur-md"></div>
+                    <div class="relative rounded-2xl p-4 bg-white/5 backdrop-blur border border-white/10 shadow-[0_8px_60px_-12px_rgba(0,0,0,0.5)]">
+                        <svg class="w-16 h-16 text-violet-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 标题与副标题（发光） -->
+            <h1 class="text-3xl md:text-2xl font-bold text-white text-center tracking-tight">
+                Welcome to PhotoToVideoAI
+            </h1>
+            <p class="mt-2 text-center text-sm md:text-base text-gray-300">
+                Unlock faster generation, clearer quality, and more stable creation experience.
+            </p>
+        </div>
+
+        <!-- 登录按钮区域（旗舰级卡片：发光边框 + 霓虹渐变 + 徽标格子） -->
+        <div class="mx-auto max-w-xl px-4">
+            <div class="relative">
+                <!-- 渐变光晕 -->
+                <div class="absolute inset-0 rounded-[20px] bg-gradient-to-br from-fuchsia-500/20 via-indigo-500/20 to-cyan-500/20 blur-2xl -z-10"></div>
+                <!-- 主卡片 -->
+                <div class="relative rounded-[20px] p-6 md:p-8 bg-[#0c0f16]/80 backdrop-blur-xl border border-white/10 shadow-[0_20px_80px_-20px_rgba(0,0,0,0.7)]">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_2px_rgba(239,68,68,0.6)]"></span>
+                            <span class="text-sm text-gray-300">Use Google account to login</span>
+                        </div>
+                    </div>
+
+                    <div class="relative flex justify-center py-2">
+                        <div id="g_id_onload"
+                            data-client_id="352749722240-9ihct6lvtbh01520dltd785633b4oo0l.apps.googleusercontent.com"
+                            data-callback="handleCredentialResponse">
+                        </div>
+                        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="filled_black"
+                            data-text="continue_with" data-shape="pill" data-logo_alignment="left">
+                        </div>
+                    </div>
+
+                    <!-- 协议提示 -->
+                    <div class="mt-5 text-[12px] text-gray-400 leading-6 text-center">
+                        By logging in, you agree to our
+                        <a href="/term" class="text-gray-300 hover:text-red-400 underline underline-offset-4">Term</a>
+                        与
+                        <a href="/privacy" class="text-gray-300 hover:text-red-400 underline underline-offset-4">Privacy</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 通用页脚组件 -->
+        <footer class="bg-[#0A0A0B] text-white mt-16 py-12 md:py-20">
+            <!-- footer.js 会将内容注入到这里 -->
+        </footer>
+
+
+    </div>
+</body>
+
+</html>

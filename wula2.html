@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wula.ai 导航栏复刻</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Lucide图标库（和原站一致） -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide@0.292.0/dist/umd/lucide.min.css">
+  
+  <!-- 自定义Tailwind配置（匹配原站颜色体系） -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // 匹配原站的颜色变量
+            
+            popover: {
+              DEFAULT: '#ffffff',
+              foreground: '#111827'
+            },
+            accent: {
+              DEFAULT: '#f97316', // 原站橙色系
+              foreground: '#ffffff'
+            },
+            primary: {
+              DEFAULT: '#f97316',
+              foreground: '#ffffff'
+            },
+            secondary: {
+              DEFAULT: '#f3f4f6',
+              foreground: '#111827'
+            },
+            foreground: '#111827',
+            'muted-foreground': '#6b7280'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      /* 补充原站用到的自定义样式 */
+      .text-shadow-none { text-shadow: none; }
+      .font-black { font-weight: 900; }
+      .font-stretch-expanded { font-stretch: expanded; }
+      .-webkit-text-stroke { -webkit-text-stroke: 0.5px currentColor; }
+    }
+  </style>
+</head>
+
+<!-- 给body加背景图模拟原站效果，凸显模糊导航栏 -->
+<body class="bg-gray-200">
+  <div class="absolute inset-0 -z-10">
+    <img src="https://picsum.photos/1920/1080" alt="背景图" class="w-full h-full object-cover opacity-80">
+  </div>
+
+  <!-- 核心导航栏（完全复刻原站结构+样式） -->
+  <nav class="fixed left-0 z-50 w-full transition-all duration-300 top-0 bg-popover/30 shadow-sm backdrop-blur-lg" data-test="navigation">
+    <div class="relative w-full">
+      <div class="container max-w-6xl mx-auto">
+        <div class="flex items-center justify-between transition-all duration-300 py-3">
+          <!-- Logo区域 -->
+          <div class="flex items-center transition-all duration-300">
+            <a class="block hover:no-underline active:no-underline" href="/">
+              <span class="flex items-center font-semibold text-foreground leading-none">
+                <!-- Logo图标（模拟原站橙色播放按钮） -->
+                <div class="w-7 h-7 flex items-center justify-center bg-primary text-primary-foreground rounded-sm">
+                  <i class="lucide lucide-play text-xs" style="transform: translateX(1px);"></i>
+                </div>
+                <span class="ml-2 hidden text-xl md:block font-black tracking-wide text-foreground text-shadow-none font-stretch-expanded -webkit-text-stroke">Wula.ai</span>
+              </span>
+            </a>
+          </div>
+
+          <!-- 桌面端导航菜单（lg以上显示） -->
+          <div class="hidden lg:flex items-center gap-1">
+            <a class="block px-3 py-2 font-bold text-foreground text-sm rounded-lg hover:bg-accent/30" href="/generation/image-to-video">视频生成</a>
+            <a class="block px-3 py-2 font-bold text-foreground text-sm rounded-lg hover:bg-accent/30" href="/#features">功能</a>
+            <a class="block px-3 py-2 font-bold text-foreground text-sm rounded-lg hover:bg-accent/30" href="/#pricing">价格</a>
+            <a class="block px-3 py-2 font-bold text-foreground text-sm rounded-lg hover:bg-accent/30" href="/#faq">常见问题</a>
+          </div>
+
+          <!-- 右侧操作区 -->
+          <div class="flex items-center gap-3 transition-all duration-300">
+            <!-- 语言切换按钮 -->
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium backdrop-blur-lg transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&>svg+svg]:hidden bg-popover/30 text-popover-foreground hover:bg-accent/30 hover:text-accent-foreground focus-visible:bg-accent/30 focus-visible:text-accent-foreground h-9 w-9 [&>svg]:m-0 [&>svg]:opacity-100" aria-label="Language" type="button">
+              <span class="relative z-10 flex items-center">
+                <i class="lucide lucide-languages text-sm"></i>
+              </span>
+            </button>
+
+            <!-- 移动端菜单按钮（lg以下显示） -->
+            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium backdrop-blur-lg transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&>svg+svg]:hidden bg-secondary/5 text-foreground hover:bg-secondary/10 focus-visible:bg-secondary/10 h-9 w-9 [&>svg]:m-0 [&>svg]:opacity-100 lg:hidden" aria-label="Menu" type="button">
+              <span class="relative z-10 flex items-center">
+                <i class="lucide lucide-menu text-sm"></i>
+              </span>
+            </button>
+
+            <!-- 桌面端用户区（lg以上显示） -->
+            <div class="hidden lg:flex items-center gap-1">
+              <!-- 用户头像按钮 -->
+              <button type="button" class="group flex cursor-pointer items-center justify-between gap-2 rounded-lg outline-hidden focus-visible:ring-2 focus-visible:ring-primary h-9 w-full" aria-label="User menu">
+                <span class="flex items-center gap-2 group/avatar">
+                  <span class="relative flex shrink-0 overflow-hidden rounded-sm h-9 w-9 group-hover:brightness-120 transition-all duration-200">
+                    <span class="h-full w-full font-bold text-xs bg-primary text-primary-foreground flex items-center justify-center rounded-lg">自</span>
+                  </span>
+                </span>
+              </button>
+
+              <!-- 充值按钮 -->
+              <button class="justify-center whitespace-nowrap text-sm font-medium backdrop-blur-lg focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&>svg]:mr-1.5 [&>svg]:opacity-60 [&>svg+svg]:hidden text-muted-foreground hover:text-accent-foreground focus-visible:bg-accent/30 focus-visible:text-accent-foreground flex items-center px-2 py-1.5 h-auto rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors" title="购买积分">
+                <span class="relative z-10 flex items-center">
+                  <span class="text-sm font-semibold text-primary mr-1.5">充值</span>
+                  <div class="flex items-center gap-1">
+                    <i class="lucide lucide-coins text-sm text-primary"></i>
+                    <span class="text-sm font-semibold text-primary">200</span>
+                  </div>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 占位内容，让页面有滚动空间 -->
+  <div class="h-[2000px] pt-20 px-4">
+    <h1 class="text-3xl font-bold text-foreground mb-8">Wula.ai 复刻示例</h1>
+
+    <a rel="" class="border-f-border hover:text-[#ff3466] text-f-text-secondary block border-b pb-4" data-button-name="home" data-track-sort="1" href="/home">Home</a>
+
+    <!-- <div class="w-[200px] h-[200px] bg-gradient-to-r from-primary/30 
+                via-primary/20 to-primary/30 
+                rounded-lg blur-xl opacity-70 transition-opacity duration-700 animate-pulse-slow"> -->
+
+
+    <div class="w-[200px] h-[200px] bg-gradient-to-r #fd8c00 
+                via-primary/20 to-primary/30 
+                rounded-lg blur-xl opacity-70 transition-opacity duration-700 animate-pulse-slow">
+
+        <div class="w-[200px] h-[200px] relative bg-popover/30 backdrop-blur-lg rounded-lg p-4 overflow-hidden">
+        
+            <button type="button" 
+            
+                class="flex w-full items-center justify-between rounded-lg text-foreground bg-popover/30 
+                        backdrop-blur-xl hover:text-accent-foreground hover:bg-accent/30 
+                        focus-visible:text-accent-foreground focus-visible:bg-accent/30 
+                        ring-offset-background placeholder:text-foreground/60 
+                        focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 
+                        transition-all duration-200 h-8 text-sm px-2 py-1">
+
+                <span style="pointer-events: none;">480P</span>
+                
+            </button>
+
+        </div>
+
+    </div>
+    
+
+
+    <p class="text-lg text-foreground">导航栏已完全复刻原站的模糊半透明效果，包含：</p>
+    <ul class="mt-4 list-disc pl-6 text-foreground">
+      <li>backdrop-blur-lg 背景模糊效果</li>
+      <li>bg-popover/30 半透明白色背景</li>
+      <li>shadow-sm 轻微阴影</li>
+      <li>响应式布局（移动端/桌面端适配）</li>
+      <li>所有交互hover效果</li>
+      <li>原站一致的颜色体系</li>
+    </ul>
+  </div>
+</body>
+</html>

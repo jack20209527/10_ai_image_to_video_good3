@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Effects & Templates for Photo to Video AI</title>
+    <meta name="description" content="Explore our extensive library of AI video effects and templates. Easily transform photos to videos with professional-grade effects using our Photo to Video AI tool. Find your perfect style now!">
+    <meta name="keywords" content="">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script>
+        global_type = GlobalConfig.TYPE_PAGE_IMAGE_TO_VIDEO;
+    </script>
+
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+       
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWQJSYVF4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BWQJSYVF4W');
+    </script>
+    <!-- clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t8qoslp193");
+    </script>
+    
+    
+    <style>
+        /* 旋转小点动画（让 orbit 容器转起来） */
+        @keyframes orbit-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        .orbit{animation:orbit-rot 2.6s linear infinite;will-change:transform}
+        /* 轻微上下浮动（用于中心图标，可选） */
+        @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+        .floaty{animation:floaty 2.2s ease-in-out infinite}
+    </style>
+
+    <!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+        // 设置导航条的按钮的点击事件
+        init_nav_event ("../", 4);
+
+    </script>
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- 通用顶部导航组件 -->
+    <header class="fixed top-0 inset-x-0 h-14 bg-[#0b0d12]/90 backdrop-blur border-b border-white/5 z-50">
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="pt-14 mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-4">
+
+            <!-- 通用侧边栏组件 -->
+            <aside class="hidden lg:block h-[calc(100vh-64px)] sticky top-14 bg-[#0b0e13] border border-white/5 rounded-lg overflow-hidden">
+            </aside>
+
+            <!-- 主内容区域 -->
+            <main class="min-h-[calc(100vh-64px)]">
+                <!-- 标题 -->
+                <div class="flex items-center justify-center">
+                    <h2 class="text-3xl font-bold">Video Effect</h2>
+                </div>
+
+
+                <!-- 加载中布局 -->
+                <div id="id_loading_state_layout" class="flex flex-col items-center justify-center min-h-[400px] bg-[#1a1d26] rounded-md mt-4 p-6">
+                    <div class="relative" style="width: 420px; height: 220px;">
+                        <!-- 背景光晕效果（冷色系，暗色风格） -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#2563EB]/25 via-[#06B6D4]/20 to-[#1E293B]/20 rounded-2xl blur-xl"></div>
+                        
+                        <!-- 主容器（玻璃拟态 + 暗色） -->
+                        <div class="relative w-full h-full bg-[#0b0e13]/90 backdrop-blur-xl rounded-2xl border border-white/10 p-6 overflow-hidden shadow-[0_20px_80px_-20px_rgba(0,0,0,0.7)]">
+                            <!-- 动态背景细纹与渐变流动 -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-[#2563EB]/10 to-[#06B6D4]/10 animate-gradient"></div>
+                            <div class="absolute inset-0 bg-grid opacity-10"></div>
+        
+                            <!-- 内容区域 -->
+                            <div class="relative flex flex-col items-center justify-center h-full select-none">
+                                <!-- 加载动画（中心图标 + 环绕小点） -->
+                                <div class="relative mb-4">
+                                    <!-- 外环发光圈 -->
+                                    <div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-blue-500/20 to-cyan-400/20 blur-xl"></div>
+                                    <!-- 旋转环 -->
+                                    <div class="w-16 h-16 rounded-full border-2 border-transparent loading-spinner" style="border-top-color:#60A5FA;border-bottom-color:#22D3EE"></div>
+                                    <!-- 中心图标 -->
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-blue-300 opacity-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="M7 17l10-10"/></svg>
+                                    </div>
+                                    <!-- 环绕小点（旋转） -->
+                                    <div class="absolute inset-0 orbit">
+                                        <span class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-400"></span>
+                                        <span class="absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                        <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                        <span class="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo-400"></span>
+                                    </div>
+                                </div>
+                                
+                                <!-- 文字区域 -->
+                                <div class="text-center">
+                                    <p class="text-[18px] font-semibold text-white mb-1">Your Creations Is Loading...</p>
+                                    <p class="text-gray-400 text-[13px]">Please wait for a moment ...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 网格展示作品 -->
+                <div id="grid_container" class="mt-4 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- 作品项将通过 JavaScript 动态添加 -->
+                </div>
+
+
+
+
+                <!-- 通用页脚组件 -->
+                <footer class="bg-[#0A0A0B] text-white py-12 md:py-20">
+                    <!-- footer.js 会将内容注入到这里 -->
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const loadingState = document.getElementById('id_loading_state_layout');
+            const gridContainer = document.getElementById('grid_container');
+
+            loadVideos ()
+            
+
+            // 加载视频
+            async function loadVideos() {
+
+                    gridContainer.innerHTML = ''; // 清空当前内容
+                    loadingState.classList.remove('hidden'); // 显示加载状态
+
+                    try {
+                        const response = await fetch('/js/video_effect.json'); // 读取 JSON 文件
+                        const videos = await response.json(); // 解析 JSON 数据
+
+                        loadingState.classList.add('hidden'); // 隐藏加载状态
+
+                        index = 0; // 循环 - 序号 
+                        videos.template_list.forEach(video => {
+
+                            if (index > 20) {
+                                return;
+                            }
+
+                            const item = document.createElement('div');
+                            item.className = 'rounded-lg'; // 外层容器
+
+                            console.log("标题: ", video.name);
+
+                            item.innerHTML = `
+
+                                <div class="rounded-lg">
+                                    <div class="aspect-[5/3] shadow_active overflow-hidden rounded-lg relative group">
+                                        <div class="absolute inset-0 z-0">
+                                            <img src="${video.cover_url}" class="w-full h-full object-cover" alt="background">
+                                        </div>
+                                        <div class="absolute inset-0 z-10" style="display: none;">
+                                            <div class="w-full h-full" style="display: none;">
+                                                <div class="el-skeleton is-animated" style="width: 100%; height: 100%;">
+                                                    <div class="el-skeleton__item el-skeleton__image !w-full !h-full">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                                            <path fill="currentColor" d="M96 896a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h832a32 32 0 0 1 32 32v704a32 32 0 0 1-32 32zm315.52-228.48-68.928-68.928a32 32 0 0 0-45.248 0L128 768.064h778.688l-242.112-290.56a32 32 0 0 0-49.216 0L458.752 665.408a32 32 0 0 1-47.232 2.112M256 384a96 96 0 1 0 192.064-.064A96 96 0 0 0 256 384"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="absolute inset-0 z-0" style="">
+                                                <img src="${video.cover_url}" class="rounded-lg object-cover" alt="template">
+                                            </div>
+                                        </div>
+                                        <div class="absolute inset-0 z-10 flex items-center justify-center" style="">
+                                            <video class="aspect-[5/3] cursor-pointer object-cover rounded-lg" src="${video.video_url}" loop muted alt="template" poster="${video.cover_url}"></video>
+                                            <div class="absolute top-0 left-0 flex items-center justify-between gap-2 w-full p-2">
+                                                <div class="px-2 py-[0.2rem] bg-[#000]/50 rounded-md text-white text-[10px] md:text-xs text-center">${video.name}</div>
+                                                <div class="bg-[#FA4F4F] px-2 py-[0.2rem] rounded-md text-white text-[10px] md:text-xs font-bold text-center">HOT</div>
+                                            </div>
+                                            <div id="id_use_this_template_button" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer px-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-100 w-27 h-8 bg-[#3B82F6] rounded-full text-white text-xs text-center flex items-center justify-center">
+                                                Use this template
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            `;
+
+                            // 鼠标悬停事件，播放视频
+                            item.addEventListener('mouseenter', () => {
+                                const videoElement = item.querySelector('video');
+                                if (videoElement) {
+                                    videoElement.play(); // 播放视频
+                                }
+                            });
+
+                            // 鼠标移出事件，停止播放视频
+                            item.addEventListener('mouseleave', () => {
+                                const videoElement = item.querySelector('video');
+                                if (videoElement) {
+                                    videoElement.pause(); // 停止播放
+                                    videoElement.currentTime = 0;
+                                }
+                            });
+
+                            // 添加点击事件
+                            const id_use_this_template_button = item.querySelector('#id_use_this_template_button');
+                            id_use_this_template_button.addEventListener('click', () => {
+                                localStorage.setItem('selectedVideo', JSON.stringify({
+                                    videoUrl: video.video_url,
+                                    title: video.name
+                                }));
+                                window.location.href = '/video-effect-detail'; // 跳转到详情页
+                            });
+
+                            // 添加布局
+                            gridContainer.appendChild(item); // 添加到容器
+
+                            index ++; // 序号+1
+                        });
+                    } catch (error) {
+                        console.error('加载视频失败:', error);
+                        loadingState.classList.add('hidden'); // 隐藏加载状态
+                    }
+                }
+
+        });
+
+
+        // 设置按钮为选中状态
+        function setActiveButton(button) {
+            button.classList.add('bg-[#333]', 'text-red-500');
+            button.querySelector('svg').classList.add('text-red-500');
+            button.querySelector('svg').classList.remove('text-slate-400');
+            button.querySelector('span').classList.add('text-red-500');
+            button.querySelector('span').classList.remove('text-slate-400');
+        }
+
+        // 设置按钮为未选中状态
+        function setInactiveButton(button) {
+            button.classList.remove('bg-[#333]', 'text-red-500');
+            button.classList.add('bg-[#1a1d26]', 'text-slate-400');
+            button.querySelector('svg').classList.remove('text-red-500');
+            button.querySelector('svg').classList.add('text-slate-400');
+            button.querySelector('span').classList.remove('text-red-500');
+            button.querySelector('span').classList.add('text-slate-400');
+        }
+    </script>
+
+</body>
+</html>
+

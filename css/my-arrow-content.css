@@ -1,0 +1,84 @@
+/** ------------ 1 ---------------------- */
+/** 1.首页: 的下拉箭头样式 */
+/* <section class="faq py-16 px-4 bg-[#0c0c13]">
+    <h2 class="text-3xl font-bold text-center mb-12">常见问题</h2>
+    <div class="max-w-3xl mx-auto space-y-6">
+        <details class="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-all duration-300">
+            <summary class="text-xl font-semibold text-[#6344f5] cursor-pointer">如何下载Good Game游戏？</summary>
+            <p class="text-gray-300 mt-2 leading-relaxed">您可以在Google Play或App Store中搜索"Good Game"进行下载。</p>
+        </details>
+        <details class="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-all duration-300">
+            <summary class="text-xl font-semibold text-[#FF6B3D] cursor-pointer">订阅费用是多少？</summary>
+            <p class="text-gray-300 mt-2 leading-relaxed">我们提供每月$9.99或每年$99.99的订阅计划，具体详情见应用内设置。</p>
+        </details>
+        <details class="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-all duration-300">
+            <summary class="text-xl font-semibold text-[#FF3366] cursor-pointer">游戏支持离线模式吗？</summary>
+            <p class="text-gray-300 mt-2 leading-relaxed">是的，您可以下载关卡内容，在离线模式下畅玩。</p>
+        </details>
+    </div>
+</section> */
+.arrow_down_button_parent_home {
+  background-color: #282a36; /* 更浅，和外层对比更明显 */
+  border-radius: 16px;
+  width: 100%;
+  border: none;
+  transition: background 0.3s, box-shadow 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+}
+
+.arrow_down_button_home {
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    padding: 20px 16px;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    transition: background 0.3s, color 0.3s;
+    background-color: transparent;
+}
+
+.arrow_down_button_home_active, .arrow_down_button_home:hover {
+    background-color: #393b4a; /* 悬停更亮 */
+    color: #ff3366;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.15);
+}
+
+.arrow_down_panel_home {
+    padding: 0 0px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.arrow_down_panel_text_home {
+    color: #aeb6c5;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.arrow_down_arrow_home {
+    width: 8px;
+    height: 8px;
+    border: solid #D1D5DB;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow_down_arrow_home.active {
+  transform: rotate(-135deg);
+}
+
+
+/** ------------ 2 ---------------------- */

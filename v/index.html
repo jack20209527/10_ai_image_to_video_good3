@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image to Video</title>
+    <meta name="description" content="Flux Kontext AI is a revolutionary free AI text-to-image editing tool. Instantly make precise, consistent edits to your photos and digital art using natural language instructions. Enjoy character consistency, fast results, and professional-grade image enhancement. No watermark, no registration required. Try Flux Kontext for creative, accurate, and user-friendly AI image editing.">
+    <meta name="keywords" content="photo hd converter, ai image upscaler, image quality enhancer, 4k image upscaler, image resolution enhancer, photo quality improver, ai photo enhancement, upscale image online, free image upscaler, batch image upscaler, image enlarger without quality loss, hd photo converter online, ai image enhancement tool, photo resolution increaser">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script>
+        global_type = GlobalConfig.TYPE_PAGE_IMAGE_TO_VIDEO;
+    </script>
+
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+
+    <!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+
+        // 以下是自身页面的点击
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 选择模型 
+            DropdownMenuUtil.init('id_btn_model', ['Flux Kontext Pro', 'Flux Kontext Max', 'Nano Banana'], 0, 1, 220, (item, index) => {
+                console.log(`选择了: ${item}, 索引: ${index}  `);
+                var text = document.getElementById('id_text_model');
+                text.innerHTML = item;
+                DropdownMenuUtil.hide();
+            });
+
+        });
+    </script>
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- Sidebar + Main -->
+    <div class="pt-14 mx-auto">
+
+            <!-- Main -->
+            <main class="">
+                    <!-- Left form card -->
+                    <section class="bg-[#0b0e13] border border-white/5 rounded-lg p-4">
+
+                        <!-- Input method -->
+                        <div class="mt-4">
+                            <label class="block text-sm text-gray-300 mb-1">图像</label>
+                        </div>
+                        <!-- Upload area -->
+                        <div id="upload_card" class="mt-2 relative rounded-lg border border-white/10 bg-[#0f131a] h-48 flex flex-col items-center justify-center text-sm cursor-pointer">
+                            <!-- 默认内容 -->
+                            <div id="uploadDefault" class="flex flex-col items-center justify-center">
+                            <div class="w-11 h-11 rounded-full bg-[#1b2330] flex items-center justify-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 7.5L12 3m0 0L7.5 7.5M12 3v13.5" />
+                                </svg>
+                            </div>
+                            <div class="text-gray-300">点击上传或拖拽到此处</div>
+                            <div class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG, GIF, WEBP</div>
+                                <button id="chooseFile" class="mt-3 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded text-sm">
+                                    选择图片</button>
+                            </div>
+                            <!-- 预览图片 -->
+                            <img id="uploadPreview" src="" alt="preview" class="hidden absolute inset-0 w-full h-full object-contain p-3" />
+                            <!-- 移除按钮（默认隐藏） -->
+                            <button id="id_btn_remove_upload" class="hidden absolute bottom-2 right-2 px-3 py-1.5 bg-red-500/80 hover:bg-red-500 text-white text-xs rounded">移除</button>
+                            <input id="file_input" type="file" accept="image/*" class="hidden" />
+                        </div>
+
+                        <!-- 输入提示词 -->
+                        <div class="mt-4">
+                            <label class="block text-sm text-gray-300 mb-1">输入提示词</label>
+                            <textarea id="id_prompt_input" rows="6" class="w-full mt-2 px-2 py-2 rounded bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500/40 text-sm" placeholder="描述你的视频..."></textarea>
+                        </div>
+
+                        <!-- 生成按钮 -->
+                        <div class="mt-3 flex items-center gap-3">
+                            <button id="id_btn_generate" class="w-full py-3 rounded-[8px] bg-gradient-to-r from-purple-600 to-red-600 text-white font-medium text-lg flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                <span>生成预览</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- 右侧显示卡片和生成结果的区域 -->
+                    <section class="bg-[#0b0e13] border border-white/5 rounded-lg p-3">
+                        <div class="text-xs text-gray-400 mb-2">由 Seedance 1.0 Pro 驱动</div>
+                        <div class="relative aspect-video bg-[#0f131a] rounded-lg overflow-hidden border border-white/10">
+                            
+                            <img id="id_preview_image" src="/img/image_content3.jpg" alt="preview" class="w-full h-full object-cover hidden" />
+                            
+                            <video id="id_preview_video" class="w-full h-full object-cover" autoplay loop muted playsinline>
+                                <source src="https://www.muse-steamer.com/caseVideos/e75beee00148cbf0a28c0cfcf2fdc199_1920_1080.mp4" type="video/mp4">
+                            </video>
+                            
+                            <div id="id_loading_layout" class="absolute inset-0 bg-black/60 backdrop-blur hidden flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="relative w-20 h-20 mx-auto">
+                                        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/25 to-cyan-500/25 blur-xl"></div>
+                                        <div class="absolute inset-[6px] rounded-full bg-white/5 border border-white/10"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <svg class="w-9 h-9 text-blue-300 animate-pulse floaty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="M7 17l10-10"/></svg>
+                                        </div>
+                                        <!-- 环绕小点 -->
+                                        <div class="absolute inset-0 orbit">
+                                            <span class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-400"></span>
+                                            <span class="absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                            <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                            <span class="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo-400"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-gray-200">正在为你创作…</div>
+                                    <div class="text-xs text-gray-400 mt-1">您可以继续流量其他部分功能，完成后可以在作品页查看</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 失败遮罩 -->
+                            <div id="id_result_error" class="hidden absolute inset-0 bg-black/50 backdrop-blur flex items-center justify-center text-center">
+                                <div>
+                                    <div class="mx-auto w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mb-3">
+                                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                                    </div>
+                                    <div class="text-white font-medium">生成失败</div>
+                                    <div class="text-xs text-gray-400 mt-1">Insufficient credits</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mt-3">
+                            <div class="text-sm text-gray-300 mb-1">提示词</div>
+                            <div id="id_prompt_result" class="text-xs text-gray-400 bg-white/5 border border-white/10 rounded p-3 leading-6">
+                                The ice blue Porsche speeds out from the night's high-rise...
+                            </div>
+                        </div>
+                    </section>
+
+            </main>
+
+    </div>
+
+    <!-- 处理交互和请求 -->
+    <script src="/js/api_tool_image_to_image.js"></script>
+
+</body>
+</html>
+

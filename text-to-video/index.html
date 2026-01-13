@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text to Video Generator | Create Videos from Words</title>
+    <meta name="description" content="Transform scripts and ideas into cinematic-quality videos with our powerful AI video generator. Simply type your text and create content for social media, marketing, and more.">
+    <meta name="keywords" content="">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script src="/js/my-common-main-page-utils.js"></script>
+
+    <script>
+        global_type = GlobalConfig.TYPE_PAGE_IMAGE_TO_VIDEO;
+    </script>
+
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+        
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWQJSYVF4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BWQJSYVF4W');
+    </script>
+    <!-- clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t8qoslp193");
+    </script>
+    
+    
+    <style>
+        /* 旋转小点动画（让 orbit 容器转起来） */
+        @keyframes orbit-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        .orbit{animation:orbit-rot 2.6s linear infinite;will-change:transform}
+        /* 轻微上下浮动（用于中心图标，可选） */
+        @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+        .floaty{animation:floaty 2.2s ease-in-out infinite}
+    </style>
+
+    <!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+        // 设置导航条的按钮的点击事件
+        init_nav_event ("../", 0);
+
+        // 以下是自身页面的点击
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 选择模型 
+            DropdownMenuUtil.init('id_btn_model', ['Google Veo3', 'Google Veo3 Fast', 'Google Veo3 Pro', 'Vidu'], 0, 1, 220, (item, index) => {
+                console.log(`选择了: ${item}, 索引: ${index}  `);
+                var text = document.getElementById('id_text_model');
+                text.innerHTML = item;
+
+                var id_credit_required_number = document.getElementById('id_credit_required_number');
+                if (index == 0) {
+                    id_credit_required_number.textContent = 50;
+                } else if (index == 1) {
+                    id_credit_required_number.textContent = 100;
+                } else if (index == 2) {
+                    id_credit_required_number.textContent = 500;
+                } else if (index == 3) {
+                    id_credit_required_number.textContent = 140;
+                }
+                
+                DropdownMenuUtil.hide();
+            });
+
+        });
+    </script>
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- 通用顶部导航组件 -->
+    <header class="fixed top-0 inset-x-0 h-14 bg-[#0b0d12]/90 backdrop-blur border-b border-white/5 z-50">
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="pt-14 mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-4">
+
+            <!-- 通用侧边栏组件 -->
+            <aside class="hidden lg:block h-[calc(100vh-64px)] sticky top-14 bg-[#0b0e13] border border-white/5 rounded-lg overflow-hidden">
+            </aside>
+
+            <!-- Main -->
+            <main class="min-h-[calc(100vh-64px)]">
+                <div class="grid grid-cols-1 xl:grid-cols-[520px,1fr] gap-4">
+                    <!-- Left form card -->
+                    <section class="bg-[#0b0e13] border border-white/5 rounded-lg p-4">
+                        <!-- 选择模型 -->
+                        <div class="mt-4">
+                            <label class="block text-sm text-gray-300 mb-1">Model</label>
+                            <div class="relative mt-2 w-full sm:w-40">
+                                <button id="id_btn_model" class="w-[220px] appearance-none px-3 py-2 pr-7 rounded bg-white/5 border border-white/10 text-sm hover:bg-white/8 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex items-center justify-between">
+                                    <span id="id_text_model">Google VOE3</span>
+                                    <svg class="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input method -->
+                        <div class="hidden mt-4">
+                            <label class="block text-sm text-gray-300 mb-1">Upload Image</label>
+                        </div>
+                        <!-- Upload area -->
+                        <div id="upload_card" class="hidden mt-2 relative rounded-lg border border-white/10 bg-[#0f131a] h-48 flex flex-col items-center justify-center text-sm cursor-pointer">
+                            <!-- 默认内容 -->
+                            <div id="uploadDefault" class="flex flex-col items-center justify-center">
+                            <div class="w-11 h-11 rounded-full bg-[#1b2330] flex items-center justify-center mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-300">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 7.5L12 3m0 0L7.5 7.5M12 3v13.5" />
+                                </svg>
+                            </div>
+                            <div class="text-gray-300">Drag or click to upload</div>
+                            <div class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG, GIF, WEBP</div>
+                                <button id="chooseFile" class="mt-3 px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded text-sm">
+                                    Select Image</button>
+                        </div>
+                            <!-- 预览图片 -->
+                            <img id="uploadPreview" src="" alt="preview" class="hidden absolute inset-0 w-full h-full object-contain p-3" />
+                            <!-- 移除按钮（默认隐藏） -->
+                            <button id="id_btn_remove_upload" class="hidden absolute bottom-2 right-2 px-3 py-1.5 bg-red-500/80 hover:bg-red-500 text-white text-xs rounded">Remove</button>
+                            <input id="file_input" type="file" accept="image/*" class="hidden" />
+                        </div>
+
+                        <!-- 输入提示词 -->
+                        <div class="mt-4">
+                            <label class="block text-sm text-gray-300 mb-1">Input Prompt</label>
+                            <textarea id="id_prompt_input" rows="6" class="w-full mt-2 px-2 py-2 rounded bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500/40 text-sm" placeholder="Please input your prompt for your video ..."></textarea>
+                        </div>
+
+                        <!-- 选择宽高比（与图片一致的卡片式样式） -->
+                        <div class="hidden mt-6">
+                            <div class="flex items-end justify-between">
+                                <div>
+                                    <h3 class="text-white text-base font-semibold">Aspect Ratio</h3>
+                                    <p class="text-gray-400 text-xs mt-1">Choose the appropriate aspect ratio.</p>
+                                </div>
+                            </div>
+                            <!-- 隐藏域：存储当前选中的宽高比值，默认 9:16 -->
+                            <input id="id_input_aspect_ratio" type="hidden" value="9:16">
+
+                            <!-- 选择比例的布局 3:4  16:9 -->
+                            <div id="id_group_aspect_ratio" class="mt-3 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2 lg:gap-3">
+                                <!-- 单个卡片：默认灰色；hover 与选中均为红色高亮 -->
+                                <button data-value="16:9" class="ar-item group rounded-xl bg-white/5 border border-white/10 h-24 transition hover:ring-2 hover:ring-red-500/30 hover:border-red-500/40">
+                                    <div class="h-full w-full p-3 relative">
+                                        <!-- 预留标签空间，剩余高度中居中展示比例方块 -->
+                                        <div class="h-full flex items-center justify-center pb-6">
+                                            <!-- 16:9 预览块 -->
+                                            <div class="ar-block w-14 h-8 rounded-md bg-white/10 group-hover:bg-red-500"></div>
+                                        </div>
+                                        <div class="ar-label absolute bottom-2 left-0 right-0 text-center text-gray-300 text-base group-hover:text-red-400 group-hover:font-semibold">16:9</div>
+                                    </div>
+                                </button>
+                                <button data-value="9:16" class="ar-item group rounded-xl bg-white/5 border border-white/10 h-24 transition hover:ring-2 hover:ring-red-500/30 hover:border-red-500/40">
+                                    <div class="h-full w-full p-3 relative">
+                                        <div class="h-full flex items-center justify-center pb-6">
+                                            <!-- 9:16 预览块 -->
+                                            <div class="ar-block w-7 h-11 rounded-md bg-white/10 group-hover:bg-red-500"></div>
+                                        </div>
+                                        <div class="ar-label absolute bottom-2 left-0 right-0 text-center text-gray-300 text-base group-hover:text-red-400 group-hover:font-semibold">9:16</div>
+                                    </div>
+                                </button>
+                                <button data-value="4:3" class="ar-item group rounded-xl bg-white/5 border border-white/10 h-24 transition hover:ring-2 hover:ring-red-500/30 hover:border-red-500/40">
+                                    <div class="h-full w-full p-3 relative">
+                                        <div class="h-full flex items-center justify-center pb-6">
+                                            <!-- 4:3 预览块 -->
+                                            <div class="ar-block w-12 h-9 rounded-md bg-white/10 group-hover:bg-red-500"></div>
+                                        </div>
+                                        <div class="ar-label absolute bottom-2 left-0 right-0 text-center text-gray-300 text-base group-hover:text-red-400 group-hover:font-semibold">4:3</div>
+                                    </div>
+                                </button>
+                                <button data-value="3:4" class="ar-item group rounded-xl bg-white/5 border border-white/10 h-24 transition hover:ring-2 hover:ring-red-500/30 hover:border-red-500/40">
+                                    <div class="h-full w-full p-3 relative">
+                                        <div class="h-full flex items-center justify-center pb-6">
+                                            <!-- 3:4 预览块 -->
+                                            <div class="ar-block w-9 h-12 rounded-md bg-white/10 group-hover:bg-red-500"></div>
+                                        </div>
+                                        <div class="ar-label absolute bottom-2 left-0 right-0 text-center text-gray-300 text-base group-hover:text-red-400 group-hover:font-semibold">3:4</div>
+                                    </div>
+                                </button>
+                                <button data-value="1:1" class="ar-item group rounded-xl bg-white/5 border border-white/10 h-24 transition hover:ring-2 hover:ring-red-500/30 hover:border-red-500/40">
+                                    <div class="h-full w-full p-3 relative">
+                                        <div class="h-full flex items-center justify-center pb-6">
+                                            <!-- 1:1 预览块 -->
+                                            <div class="ar-block w-10 h-10 rounded-md bg-white/10 group-hover:bg-red-500"></div>
+                                        </div>
+                                        <div class="ar-label absolute bottom-2 left-0 right-0 text-center text-gray-300 text-base group-hover:text-red-400 group-hover:font-semibold">1:1</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 积分要求信息 -->
+                        <div class="mt-4 flex items-center gap-2 text-sm text-gray-400">
+                            <img src="/img/credit_solid.png" alt="credit_cart" class="w-4 h-4">
+                            <span>Credits required: </span>
+                            <span id="id_credit_required_number">50</span>
+                        </div>
+
+                        <!-- 生成按钮 -->
+                        <div class="mt-3 flex items-center gap-3">
+                            <button id="id_btn_generate" class="w-full py-3 rounded-[8px] bg-gradient-to-r from-purple-600 to-red-600 text-white font-medium text-lg flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                <span>Start Generate</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- 右侧显示卡片和生成结果的区域 -->
+                    <section class="bg-[#0b0e13] border border-white/5 rounded-lg p-3">
+                        <div class="text-xs text-gray-400 mb-2"></div>
+                        <div class="relative aspect-video bg-[#0f131a] rounded-lg overflow-hidden border border-white/10">
+                            
+                            <img id="id_preview_image" src="/img/image_content3.jpg" alt="preview" class="w-full h-full object-cover hidden" />
+                            
+                            <video id="id_preview_video" class="w-full h-full object-cover" autoplay loop muted playsinline>
+                                <source src="https://www.muse-steamer.com/caseVideos/e75beee00148cbf0a28c0cfcf2fdc199_1920_1080.mp4" type="video/mp4">
+                            </video>
+                            
+                            <div id="id_loading_layout" class="absolute inset-0 bg-black/60 backdrop-blur hidden flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="relative w-20 h-20 mx-auto">
+                                        <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/25 to-cyan-500/25 blur-xl"></div>
+                                        <div class="absolute inset-[6px] rounded-full bg-white/5 border border-white/10"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <svg class="w-9 h-9 text-blue-300 animate-pulse floaty" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="M7 17l10-10"/></svg>
+                                        </div>
+                                        <!-- 环绕小点 -->
+                                        <div class="absolute inset-0 orbit">
+                                            <span class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-blue-400"></span>
+                                            <span class="absolute top-1/2 -right-1 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                                            <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                            <span class="absolute top-1/2 -left-1 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo-400"></span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-gray-200">Generating ...</div>
+                                    <div class="text-xs text-gray-400 mt-1">You can continue to use other parts of the function, and you can view the work after completion.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 失败遮罩 -->
+                            <div id="id_result_error" class="hidden absolute inset-0 bg-black/50 backdrop-blur flex items-center justify-center text-center">
+                                <div>
+                                    <div class="mx-auto w-12 h-12 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center mb-3">
+                                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+                                    </div>
+                                    <div class="text-white font-medium">Failed to generate</div>
+                                    <div class="text-xs text-gray-400 mt-1">Insufficient credits</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="hidden mt-3">
+                            <div class="text-sm text-gray-300 mb-1">Prompt</div>
+                            <div id="id_prompt_result" class="text-xs text-gray-400 bg-white/5 border border-white/10 rounded p-3 leading-6">
+                                The ice blue Porsche speeds out from the night's high-rise...
+                            </div>
+                        </div>
+                    </section>
+                    
+                </div>
+
+                <!-- Veo3 产品介绍（通用模块：标题 + 亮点 + 口碑 + FAQ + CTA） -->
+                <section class="bg-[#0b0e13] border border-white/5 mt-4 rounded-lg p-4 lg:p-6">
+                    <div class="text-center mb-6 lg:mb-8">
+                        <h2 class="font-bold mb-3 lg:mb-4">
+                            <span class="text-3xl md:text-4xl text-white">Turn Words into Captivating Videos with Our AI Generator</span>
+                        </h2>
+                        <p class="text-gray-300 text-sm leading-6 max-w-3xl mx-auto">
+                            Unleash your creativity with our advanced <span class="text-purple-300">AI video generator</span>. Effortlessly convert any text, from a simple sentence to a detailed script, into dynamic video content, powered by cutting-edge models. Create stunning visuals for social media, marketing, or personal projects in minutes.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">AI-Powered Script-to-Screen</h3>
+                            <p class="text-gray-300 leading-relaxed">Our <span class="text-purple-300">Text to Video</span> engine interprets your text and converts it into stunning visuals, making it ideal for creators, marketers, and educators to turn words into high-impact videos.</p>
+                        </div>
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-green-500 to-teal-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Cinematic Quality, No Editing Skills</h3>
+                            <p class="text-gray-300 leading-relaxed">Our advanced <span class="text-red-300">AI video generator</span> ensures every frame is professionally rendered with smooth transitions and dynamic motion, giving your content a studio-level upgrade without needing an editor.</p>
+                        </div>
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Built-in Audio Integration</h3>
+                            <p class="text-gray-300 leading-relaxed">The AI generates background music, ambient sounds, or voiceovers in sync with your script, providing an end-to-end <span class="text-yellow-300">AI Video Generator</span> experience for creators on the go.</p>
+                        </div>
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 7h.01M17 12h.01M9 16h.01M15 16h.01M9 20h.01M15 20h.01M6 8a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Contextual Scene Generation</h3>
+                            <p class="text-gray-300 leading-relaxed">The system understands the mood and tone of your text, choosing visuals that align with your purpose to create compelling video narratives. This is a key feature of our <span class="text-purple-300">Text to Video</span> tool.</p>
+                        </div>
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">Easy for Everyone</h3>
+                            <p class="text-gray-300 leading-relaxed">Whether you're a content creator, marketer, educator, or startup founder, our tool is simple to use. Just type your script and let the AI do the rest. No prior experience is needed.</p>
+                        </div>
+                        <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                            <div class="p-3 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-white">High-Quality Output</h3>
+                            <p class="text-gray-300 leading-relaxed">Our platform delivers professional-grade video output, ensuring your generated content maintains crisp visual quality and rich detail, perfect for any platform.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="text-center mt-12 mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">How to Use Our <span class="text-purple-300">Text to Video</span> AI Generator</h2>
+                        <p class="text-gray-300 max-w-3xl mx-auto">It only takes a few minutes to transform your ideas into stunning videos.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div class="relative">
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="text-center mb-6">
+                                    <div class="relative mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <span class="text-xl font-bold text-white">1</span></div>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-white text-center">Sign Up or Log In</h3>
+                                <div class="space-y-3 text-gray-300 text-center">
+                                    <p class="leading-relaxed">Create an account to get started and unlock the full features of our <span class="text-purple-300">text to video</span> interface.</p>
+                                    <div class="bg-blue-900/20 p-3 rounded-lg">
+                                        <p class="text-sm text-left font-medium text-blue-300">💡 Tip: Log in to access your previous creations and settings.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="text-center mb-6">
+                                    <div class="relative mx-auto w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <span class="text-xl font-bold text-white">2</span></div>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-white text-center">Type or Paste Your Script</h3>
+                                <div class="space-y-3 text-gray-300 text-center">
+                                    <p class="leading-relaxed">Enter your idea in the text box. You can type a simple prompt, scene description, or a full script for the AI to interpret.</p>
+                                    <div class="bg-green-900/20 p-3 rounded-lg">
+                                        <p class="text-sm text-left font-medium text-green-300">🎯 Recommendation: The more descriptive your text, the better the result from the <span class="text-red-300">AI video generator</span>.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="text-center mb-6">
+                                    <div class="relative mx-auto w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                        <span class="text-xl font-bold text-white">3</span></div>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-white text-center">Generate & Download</h3>
+                                <div class="space-y-3 text-gray-300 text-center">
+                                    <p class="leading-relaxed">Click "Generate." The AI will process your script and create a video with matching visuals, motion, and music. Preview and download your video in minutes.</p>
+                                    <div class="bg-orange-900/20 p-3 rounded-lg">
+                                        <p class="text-sm text-left font-medium text-orange-300">⚡ Fast: Your video will be ready in a few minutes, thanks to our optimized engine.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="mb-20">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Who Can Benefit from a <span class="text-purple-300">Text to Video</span> Generator?</h2>
+                            <p class="text-gray-300 max-w-3xl mx-auto">Our <span class="text-yellow-300">AI video generator</span> is designed for anyone who wants to create high-impact video content without the need for complex editing.</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-2 11.5V18a2 2 0 002 2h.5a.5.5 0 01.5.5V21a1 1 0 01-1 1H5a1 1 0 01-1-1v-.5a.5.5 0 01.5-.5H5a2 2 0 002-2v-.5"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Content Creators & Influencers</h3>
+                                        <span class="text-sm text-purple-400 font-medium">Shorts • Vlogs • Promos</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">Create scroll-stopping <span class="text-red-300">text to video</span> shorts, vlogs, and promos for YouTube, TikTok, and Instagram, all from a simple text prompt.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-purple-900/30 text-purple-300 text-xs rounded-full">Social Media</span>
+                                    <span class="px-3 py-1 bg-purple-900/30 text-purple-300 text-xs rounded-full">Engagement</span>
+                                    <span class="px-3 py-1 bg-purple-900/30 text-purple-300 text-xs rounded-full">Storytelling</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="p-3 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Marketers & Advertisers</h3>
+                                        <span class="text-sm text-blue-400 font-medium">Ads • Explainer Videos • Promotions</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">Generate ad videos, explainer content, and promo visuals directly from product descriptions or campaign messages. Streamline your marketing efforts with our powerful <span class="text-purple-300">AI video generator</span>.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-full">Branding</span>
+                                    <span class="px-3 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-full">Campaigns</span>
+                                    <span class="px-3 py-1 bg-blue-900/30 text-blue-300 text-xs rounded-full">Product Launch</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="p-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Educators & Trainers</h3>
+                                        <span class="text-sm text-green-400 font-medium">E-learning • Online Courses • Demos</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">Turn lesson plans, textbooks, or blog posts into engaging visual content. Perfect for e-learning, online training, and digital classrooms where you need to make complex topics simple and visually appealing.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-green-900/30 text-green-300 text-xs rounded-full">Tutorials</span>
+                                    <span class="px-3 py-1 bg-green-900/30 text-green-300 text-xs rounded-full">Courses</span>
+                                    <span class="px-3 py-1 bg-green-900/30 text-green-300 text-xs rounded-full">Knowledge Transfer</span>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-gray-700/50 hover:shadow-xl transition-all duration-300 group">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <div class="p-3 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white">Startups & Founders</h3>
+                                        <span class="text-sm text-orange-400 font-medium">Pitches • Value Propositions • Demos</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4 leading-relaxed">Pitch ideas visually by converting product pitches, landing page copy, or value propositions into animated video stories. Rapidly prototype and share your vision without a huge time investment.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-orange-900/30 text-orange-300 text-xs rounded-full">Pitching</span>
+                                    <span class="px-3 py-1 bg-orange-900/30 text-orange-300 text-xs rounded-full">Marketing</span>
+                                    <span class="px-3 py-1 bg-orange-900/30 text-orange-300 text-xs rounded-full">Ideation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-semibold text-white">Frequently Asked Questions</h3>
+                    </div>
+                    <div class="space-y-4 mb-6 lg:mb-10">
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-purple-500/20 text-purple-300 flex items-center justify-center text-sm">1</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">What is an AI <span class="text-purple-300">Text to Video</span> Generator?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">An <span class="text-purple-300">AI video generator</span> for <span class="text-purple-300">Text to Video</span> is a tool that uses advanced AI to create a complete video from a text input, including visuals, motion, and audio.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center text-sm">2</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">Do I need editing skills to use this tool?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">No editing or design skills are required. Simply provide your text prompt and the <span class="text-red-300">AI video generator</span> will automatically create a professional-quality video for you.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-green-500/20 text-green-300 flex items-center justify-center text-sm">3</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">Can I customize the generated video's style?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">Yes, you can write detailed creative prompts to specify the style, mood, and tone you want to achieve. The AI understands the context and intent behind your words to produce aligned visuals.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-orange-500/20 text-orange-300 flex items-center justify-center text-sm">4</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">What kind of text works best with this generator?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">Any text works, from a single sentence to a full script. However, clear and descriptive prompts lead to more specific and creative video results.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center text-sm">5</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">How long does it take to create a video?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">The video is typically generated in a few minutes, depending on the length and complexity of your script. Our platform is optimized for fast and efficient creation.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-[#151924] border border-white/10 rounded-xl p-4">
+                            <div class="flex items-start gap-3">
+                                <span class="shrink-0 w-6 h-6 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center text-sm">6</span>
+                                <div>
+                                    <h4 class="text-white font-semibold">Can I use the generated videos for commercial purposes?</h4>
+                                    <p class="mt-1 text-gray-400 text-sm leading-6">Yes, videos created with our <span class="text-yellow-300">text to video</span> tool can be used for commercial projects, including ads, social media campaigns, and product promotions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl p-5 lg:p-8 bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 border border-white/10">
+                        <div class="text-center">
+                            <h3 class="text-xl lg:text-2xl font-bold text-white">Ready to Turn Your Words into a Video?</h3>
+                            <p class="text-gray-200 text-sm lg:text-base mt-2 max-w-3xl mx-auto">Don’t wait any longer to experience the transformative power of a <span class="text-purple-300">text to video</span> generator. Join thousands of creators and start your journey today!</p>
+                            <div class="mt-4">
+                                <a id="start-creating-button" href="#" class="inline-flex items-center justify-center px-5 py-2.5 rounded-[10px] bg-red-600 hover:bg-red-700 text-white text-sm lg:text-base">Start Creating Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- 通用页脚组件 -->
+                <footer class="bg-[#0A0A0B] text-white py-12 md:py-20">
+                    <!-- footer.js 会将内容注入到这里 -->
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- 处理交互和请求 -->
+    <script src="/js/api_text_to_video.js"></script>
+
+</body>
+</html>
+

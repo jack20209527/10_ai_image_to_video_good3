@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo to Video AI Pricing: Flexible Plans for Every Creator</title>
+    <meta name="description" content="Transform Photos to Videos: Start for Free or Upgrade Today">
+    <meta name="keywords" content="">
+    <script src="/tailwind.js"></script>
+    <link rel="stylesheet" href="/tailwind.css">
+    <link rel="stylesheet" href="/css/home.css?v=202509111344">
+    <link rel="canonical" href="https://phototovideoai.app"/>
+    <link rel="icon" href="/img/logo.png" type="image/x-icon">
+    
+    <script src="/js/my-common-util.js?v=202509111346"></script>
+    <script>
+        global_type = GlobalConfig.TYPE_PAGE_IMAGE_TO_VIDEO;
+    </script>
+
+    <script src="/js/my-local-storage-util.js?v=202509111344"></script>
+    <script src="/js/my-login.js?v=202509111344"></script>
+    <script src="/js/my_nav.js?v=202509111344"></script>
+    <script src="/js/custom-toast.js?v=202509111344"></script>
+    <script src="/js/my-dropdown-menu.js?v=202509111344"></script>
+    <script src="/js/my-loading-util.js?v=202509111344"></script>
+    <script src="/js/my-footer.js?v=202509111344"></script>
+    
+    <script src="/js/my-lan-config.js?v=202509111344"></script>
+    <script src="/js/my-lan-manager.js?v=202509111344"></script>
+        
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWQJSYVF4W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BWQJSYVF4W');
+    </script>
+    <!-- clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t8qoslp193");
+    </script>
+    
+    
+    <style>
+        /* 旋转小点动画（让 orbit 容器转起来） */
+        @keyframes orbit-rot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+        .orbit{animation:orbit-rot 2.6s linear infinite;will-change:transform}
+        /* 轻微上下浮动（用于中心图标，可选） */
+        @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+        .floaty{animation:floaty 2.2s ease-in-out infinite}
+    </style>
+
+    <!-- 设置登录、初始化顶部导航、侧边栏 -->
+    <script>
+        // 设置导航条的按钮的点击事件
+        init_nav_event ("../", -1);
+
+    </script>
+
+</head>
+
+<body class="bg-[#0f1115] text-gray-200">
+
+    <!-- 通用顶部导航组件 -->
+    <header class="fixed top-0 inset-x-0 h-14 bg-[#0b0d12]/90 backdrop-blur border-b border-white/5 z-50">
+    </header>
+
+    <!-- Sidebar + Main -->
+    <div class="pt-14 mx-auto">
+        <div class="w-full mx-auto">
+
+            <!-- 主内容区域 -->
+            <main class="">
+
+                <!-- 价格方案部分 -->
+                <section class="py-20 relative overflow-hidden" id="pricing">
+                    <div class="absolute inset-0">
+                        <div class="absolute inset-0 bg-[#0A0A0B] opacity-90"></div>
+                    </div>
+
+                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-20">
+                            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                                <span class="bg-gradient-to-r from-[#FF3366] to-[#9D34DA] bg-clip-text text-transparent"
+                                    data-lan="hero.price_title" >
+                                    Choose The Plan That Suits You
+                                </span>
+                            </h2>
+                            <p class="text-gray-400 text-lg" data-lan="hero.price_desc" >
+                                Flexible price plans to meet different needs
+                            </p>
+                        </div>
+
+                        <!-- 价格卡片容器 -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                            <!-- Basic 版本 -->
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#FF3366]/20 to-[#9D34DA]/20 rounded-2xl opacity-0 
+                                        group-hover:opacity-100 blur-xl transition-all duration-500"></div>
+                                <div class="relative h-full bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 
+                                        group-hover:border-[#FF3366]/50 transition-all duration-300">
+
+                                    <div class="text-center mb-6 pt-6">
+                                        <h3 class="text-2xl font-bold text-white mb-4"
+                                        data-lan="hero.price_basic_title" >Basic</h3>
+                                        <div class="flex items-center justify-center gap-2 mb-1">
+                                            <span class="text-gray-400 line-through text-lg">$8</span>
+                                            <span class="text-4xl font-bold text-blue-400">$5</span>
+                                        </div>
+                                    </div>
+
+                                    <ul class="space-y-4 mb-8">
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>3500 Credits</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>0.0015$ / Credit</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>AI image editing with Flux Kontext</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>25 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Essential AI photo enhancement</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Standard AI repair & upscaling</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>25 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>1800 images max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Max 8 second videos</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Google Veo 3 Support</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>No Watermark</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>One-on-One Service</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Private</span>
+                                        </li>
+                                    </ul>
+
+                                    <!-- PayPal按钮容器 (默认隐藏) -->
+                                    <div id="paypal-button-container1"></div>
+
+                                </div>
+                            </div>
+
+                            <!-- Unlimited 版本 (推荐) -->
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#FF3366]/30 to-[#9D34DA]/30 rounded-2xl opacity-0 
+                                        group-hover:opacity-100 blur-xl transition-all duration-500"></div>
+                                <div class="relative h-full bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-8 
+                                        border-2 border-[#FF3366] transform scale-105">
+
+                                    <div class="absolute -top-4 right-4">
+                                        <span class="bg-pink-500 text-white px-3 py-1 rounded-full text-sm">Save 40%</span>
+                                    </div>
+
+                                    <div class="text-center mb-6 pt-6">
+                                        <h3 class="text-2xl font-bold text-pink-500 mb-4" 
+                                        data-lan="hero.price_popular" >Popular</h3>
+                                        <div class="flex items-center justify-center gap-2 mb-1">
+                                            <span class="text-gray-400 line-through text-lg">$14</span>
+                                            <span class="text-4xl font-bold text-pink-500">$8</span>
+                                        </div>
+                                    </div>
+
+                                    <ul class="space-y-4 mb-8">
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>5600 Credits</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>0.0013$ / Credit</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>AI image editing with Flux Kontext</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>40 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Essential AI photo enhancement</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Standard AI repair & upscaling</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>40 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>2800 images max</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Max 8 second videos</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Google Veo 3 Support</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>No Watermark</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>One-on-One Service</span>
+                                        </li>
+                                        <li class="flex items-center text-pink-500">
+                                            <svg class="w-5 h-5 text-pink-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Private</span>
+                                        </li>
+                                    </ul>
+
+                                    <!-- PayPal按钮容器 (默认隐藏) -->
+                                    <div id="paypal-button-container2"></div>
+
+                                </div>
+                            </div>
+
+                            <!-- Pro 版本 -->
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#FF3366]/20 to-[#9D34DA]/20 rounded-2xl opacity-0 
+                                        group-hover:opacity-100 blur-xl transition-all duration-500"></div>
+                                <div class="relative h-full bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 
+                                        group-hover:border-[#FF3366]/50 transition-all duration-300">
+
+                                    <div class="text-center mb-6 pt-6">
+                                        <h3 class="text-2xl font-bold text-white mb-4"
+                                            data-lan="hero.price_advanced">Advanced</h3>
+                                        <div class="flex items-center justify-center gap-2 mb-1">
+                                            <span class="text-gray-400 line-through text-lg">$40</span>
+                                            <span class="text-4xl font-bold text-blue-400">$19.5</span>
+                                        </div>
+                                    </div>
+
+                                    <ul class="space-y-4 mb-8">
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>14000 Credits</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>0.002$ / Credit</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>AI image editing with Flux Kontext</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>100 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Essential AI photo enhancement</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Standard AI repair & upscaling</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>100 videos max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>7000 images max</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Max 8 second videos</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Google Veo 3 Support</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>No Watermark</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>One-on-One Service</span>
+                                        </li>
+                                        <li class="flex items-center text-gray-300">
+                                            <svg class="w-5 h-5 text-[#FF3366] mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Private</span>
+                                        </li>
+                                    </ul>
+
+                                    <!-- PayPal按钮容器 (默认隐藏) -->
+                                    <div id="paypal-button-container3"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- 必须要最后引入这个 -->
+                <script src="https://www.paypal.com/sdk/js?client-id=AepN0bzNSwlaIsO3ODJXlvnEffHWtx1k2aAbuW6QoPj9f-K2AiTOA3vBDnHkQHpDmZjx-MB32g1mnMAj&currency=USD"></script>
+                <script src="/js/my_pay.js"> </script>
+
+
+
+                <!-- 通用页脚组件 -->
+                <footer class="bg-[#0A0A0B] text-white py-12 md:py-20">
+                    <!-- footer.js 会将内容注入到这里 -->
+                </footer>
+
+            </main>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+        });
+
+    </script>
+
+</body>
+</html>
+

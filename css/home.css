@@ -1,0 +1,333 @@
+/* 基础样式 */
+body {
+    background-color: #0A0A0B;
+    color: #fff;
+}
+
+/* 3D 悬浮效果 */
+.hover-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.hover-3d:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+}
+
+/* 发光效果 */
+.glow {
+    position: relative;
+}
+
+.glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, #FF3366, #FF6B3D, #9D34DA);
+    border-radius: inherit;
+    filter: blur(15px);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+}
+
+.glow:hover::before {
+    opacity: 0.5;
+}
+
+/* 渐变背景动画 */
+.gradient-animate {
+    background: linear-gradient(45deg,
+            rgba(255, 51, 102, 0.1),
+            rgba(255, 107, 61, 0.1),
+            rgba(157, 52, 218, 0.1));
+    background-size: 200% 200%;
+    animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 磨砂玻璃效果 */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 粒子效果 */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: linear-gradient(45deg, #FF3366, #FF6B3D);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.perspective {
+    perspective: 2000px;
+}
+
+.rotate-y-12 {
+    transform: rotateY(12deg);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* 滚动显示动画 */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+.scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 隐藏滚动条但保持功能 */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* 自动滚动动画 */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.auto-scroll {
+    animation: scroll 30s linear infinite;
+}
+
+/* 3D 悬浮卡片效果 */
+.card-3d {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.card-3d:hover .card-content {
+    transform: translateZ(20px) rotateX(10deg);
+}
+
+/* 动态渐变背景 */
+.gradient-animate {
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 光效动画 */
+.glow-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.glow-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent 45%,
+            rgba(255, 255, 255, 0.1) 48%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 52%,
+            transparent 55%);
+    transform: rotate(45deg);
+    animation: glow 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {
+        transform: translate(-100%, -100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translate(100%, 100%) rotate(45deg);
+    }
+}
+
+/* 3D 网格背景动画 */
+@keyframes gridMove {
+    0% {
+        transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(100px);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateX(60deg) translateY(0px) translateZ(100px);
+    }
+}
+
+.grid-animate {
+    animation: gridMove 20s linear infinite;
+}
+
+/* 视差滚动效果 */
+.parallax {
+    transform: translateY(var(--parallax-y));
+    transition: transform 0.1s ease-out;
+}
+
+/* logo图标动的 */
+@keyframes logoWobble {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+    100% { transform: rotate(0deg); }
+}
+.logo-hover {
+    transform-origin: bottom center;
+    transition: transform 0.3s ease;
+}
+.logo-hover:hover {
+    animation: logoWobble 0.5s ease-in-out infinite;
+}
+
+/* 首页，顶部视频列表的滚动动画 */
+@keyframes home_top_video_list_scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.home_top_video_list_scroll_inner {
+    animation: home_top_video_list_scroll 20s linear infinite; /* 调整时间以控制滚动速度 */
+    white-space: nowrap; /* 防止换行 */
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+    width: 14px; /* 滚动条的宽度 */
+}
+::-webkit-scrollbar-track {
+    background: #2d2d2d; /* 滚动条轨道的背景色 */
+    border-radius: 2px; /* 圆角 */
+}
+::-webkit-scrollbar-thumb {
+    background: #6b6b6b; /* 滚动条的颜色 */
+    border-radius: 10px; /* 圆角 */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #939393; /* 滚动条悬停时的颜色 */
+}
+/* 自定义滚动条的边距 */
+::-webkit-scrollbar-thumb:vertical {
+    border: 3px solid transparent; /* 透明边距 */
+    background-clip: padding-box; /* 确保背景不被边距遮挡 */
+}
+
+/** 标签内容最多4行，末尾显示...，如果超过4行的话 */
+.line-clamp-4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+
+  
